@@ -1,0 +1,164 @@
+@charset "utf-8";
+/* CSS Document */
+
+html, body, div, span, applet, object, iframe,
+h4, h5, h6, p, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, img, ins, kbd, q, s, samp,
+small, strike, tt, var,
+b, u, center,
+dl, dt, dd, 
+fieldset, form, label, legend,
+caption, article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+body {
+	line-height: 1;
+	background-color: #ead6bf;
+	color: #280e11;
+}
+
+sup {
+	font-size: 10px;
+}
+
+blockquote {
+	font-weight: normal;
+}
+
+html,body{
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	height:100%;
+	min-width:1020px;
+} 
+
+.bodycontent {
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: 0;
+	padding: 0;
+	margin-left: auto;
+	margin-right: auto;
+	width: 1000px;		
+}
+
+.sidebar {
+	position: absolute;
+	padding-top: 26px;
+	padding-left: 10px;
+}
+
+.menu {
+	background-color: #527d73;
+	height: 30px;
+}
+
+.menulinks {
+	text-align: center;
+	padding-top: 6px;
+	color: #FFF;
+	font-size: 14px;
+	font-family: Verdana, Geneva, sans-serif;
+	text-decoration: none;
+	font-weight: bold;
+	padding-left: 181px;
+}
+
+.menulinks a {
+	color: #FFF;
+	font-size: 14px;
+	font-family: Verdana, Geneva, sans-serif;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.contentarea {
+	width: 722px;
+	background-color: #968267;
+	min-height: 740px;
+	margin-left: 260px;
+	margin-top: 24px;
+	padding: 10px;
+	text-align: center;
+	font-weight: normal;
+
+}
+
+.contentarea a {
+	color: #ead6bf;
+	font-size: 12px;
+	font-family: Verdana, Geneva, sans-serif;
+	text-decoration: none;
+	font-weight: bold;
+
+}
+
+.footer {
+	margin-top: 50px;
+	margin-left: 150px;
+	margin-bottom: 20px;
+}
+
+.footerlogo {
+	float: left;
+	padding-right: 100px;
+}
+
+.footertext {
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 10px;
+	font-weight: bold;
+	padding-top: 10px;
+}
+
+
+.homepage ol li {
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.homepage ol li p {
+	font-size: 16px;
+	font-weight: normal;
+	line-height: normal;
+}
+
+.innerlist ol, .innerlist ol li {
+		font-size: 16px;
+	font-weight: normal;
+	line-height: normal;
+}
+
+.saved {
+	color: #000000;
+	font-size: 12px;
+	font-family: Verdana, Geneva, sans-serif;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.pagination strong {
+	font-size: 12px;
+	font-family: Verdana, Geneva, sans-serif;
+	text-decoration: none;
+	font-weight: normal;
+}
+
+.saveditem, .errors {
+	background-color: #527d73;
+	 margin-left: 50px; 
+	 margin: 30px;
+}
