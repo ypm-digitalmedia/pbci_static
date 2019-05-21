@@ -1,0 +1,590 @@
+<?php
+
+$anyPost = false;
+	
+$data = $_POST['Cardindex'];
+	
+if( !empty($data['code']) || 
+ 	!empty($data['genus']) || 
+ 	!empty($data['species']) || 
+ 	!empty($data['author']) || 
+ 	!empty($data['status']) || 
+ 	!empty($data['age']) || 
+ 	!empty($data['formation']) || 
+ 	!empty($data['locality']) || 
+ 	!empty($data['synonym']) || 
+ 	!empty($data['refnum']) || 
+ 	!empty($data['bibliography']) 
+   ) {
+	$anyPost = true;
+}
+
+?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>Paleobotany Card Search</title>
+<link href="../public/css/style.css" rel="stylesheet" type="text/css" />
+<link href="../public/css/prettyPhoto.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript" src="../public/js/jquery/jquery.js"></script>
+<script type="text/javascript" src="../public/js/jquery/jquery.prettyPhoto.js"></script>
+<script type="text/javascript" src="../public/js/jquery/jquery.cookie.js"></script>
+<script type="text/javascript" src="../public/js/pages/prettyPhoto.js"></script>
+<script type="text/javascript" src="../public/js/pages/saveResult.js"></script>
+<script type="text/javascript" src="../public/js/lodash.min.js"></script>
+<script type="text/javascript" src="../public/js/main.js"></script>
+</head>
+<body>
+	<div class="bodycontent">
+    	<div class="sidebar">
+        	<img src="../public/images/sidebar.png" width="248" height="1034" border="0" />
+        </div>
+    	<img src="../public/images/header.jpg" width="1000" height="228" border="0" />
+	</div>
+    <div class="menu">
+    	<div class="bodycontent menulinks">
+        	<a href="../">Home</a> | 
+        	<a  href="../user-guide">User Guide</a> | 
+        	<a href="../search">Search</a> | 
+        	<a href="../saved">Saved Results</a> | 
+        	<a href="../contact-us">Contact Us</a>
+        </div>
+    </div>
+    <div class="bodycontent">
+    	<div class="contentarea">
+			<form action="results.php" method="post" accept-charset="utf-8" class="add" id="myform" style="display: none">
+			<fieldset id="searchFieldset">
+				<legend><h2>Search for Cards</h2></legend>
+
+				<div class="row field">
+					<label for="code">Code</label><br />
+					<input type="text" name="Cardindex[code]" value="" id="Cardindex_code"  />
+				</div>
+				<div class="row field">
+					<label for="genus">Genus</label><br />
+					<input type="text" name="Cardindex[genus]" value="" id="Cardindex_genus"  />
+				</div>
+				<div class="row field">
+					<label for="species">Species</label><br />
+					<input type="text" name="Cardindex[species]" value="" id="Cardindex_species"  />
+				</div>
+				<div class="row field">
+					<label for="author">Author</label><br />
+					<input type="text" name="Cardindex[author]" value="" id="Cardindex_author"  />
+				</div>
+				<div class="row field">
+					<label for="status">Status</label><br />
+					<input type="text" name="Cardindex[status]" value="" id="Cardindex_status"  />
+				</div>
+				<div class="row field">
+					<label for="status">Reference</label><br />
+					<input type="text" name="Cardindex[reference]" value="" id="Cardindex_reference"  />
+				</div>
+				<div class="row field">
+					<label for="age">Age</label><br />
+					<input type="text" name="Cardindex[age]" value="" id="Cardindex_age"  />
+				</div>
+				<div class="row field">
+					<label for="formation">Formation</label><br />
+					<input type="text" name="Cardindex[formation]" value="" id="Cardindex_formation"  />
+				</div>
+				<div class="row field">
+					<label for="formation">Member</label><br />
+					<input type="text" name="Cardindex[member]" value="" id="Cardindex_member"  />
+				</div>
+				<div class="row field">
+					<label for="locality">Locality</label><br />
+					<input type="text" name="Cardindex[locality]" value="" id="Cardindex_locality"  />
+				</div>
+				<div class="row field">
+					<label for="synonym">Remark</label><br />
+					<input type="text" name="Cardindex[remark]" value="" id="Cardindex_remark"  />
+				</div>
+				<div class="row field">
+					<label for="synonym">Synonym</label><br />
+					<input type="text" name="Cardindex[synonym]" value="" id="Cardindex_synonym"  />
+				</div>
+			<!--
+				<div class="row field">
+					<label for="refnum">RefNum</label><br />
+					<select name="Cardindex[refnum]" id="Cardindex_refnum">
+						<option value="" selected="selected">-----------</option>
+
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+						<option value="13">13</option>
+						<option value="14">14</option>
+						<option value="15">15</option>
+						<option value="16">16</option>
+						<option value="17">17</option>
+						<option value="18">18</option>
+						<option value="19">19</option>
+						<option value="20">20</option>
+						<option value="21">21</option>
+						<option value="22">22</option>
+						<option value="23">23</option>
+						<option value="24">24</option>
+						<option value="25">25</option>
+						<option value="26">26</option>
+						<option value="27">27</option>
+						<option value="28">28</option>
+						<option value="29">29</option>
+						<option value="30">30</option>
+						<option value="31">31</option>
+						<option value="32">32</option>
+						<option value="33">33</option>
+						<option value="34">34</option>
+						<option value="35">35</option>
+						<option value="36">36</option>
+						<option value="37">37</option>
+						<option value="38">38</option>
+						<option value="39">39</option>
+						<option value="40">40</option>
+						<option value="41">41</option>
+						<option value="42">42</option>
+						<option value="43">43</option>
+						<option value="44">44</option>
+						<option value="45">45</option>
+						<option value="46">46</option>
+						<option value="47">47</option>
+						<option value="48">48</option>
+						<option value="49">49</option>
+						<option value="50">50</option>
+						<option value="51">51</option>
+						<option value="52">52</option>
+						<option value="53">53</option>
+						<option value="54">54</option>
+						<option value="55">55</option>
+						<option value="56">56</option>
+						<option value="57">57</option>
+						<option value="58">58</option>
+						<option value="59">59</option>
+						<option value="60">60</option>
+						<option value="61">61</option>
+						<option value="62">62</option>
+						<option value="63">63</option>
+						<option value="64">64</option>
+						<option value="65">65</option>
+						<option value="66">66</option>
+						<option value="67">67</option>
+						<option value="68">68</option>
+						<option value="69">69</option>
+						<option value="70">70</option>
+						<option value="71">71</option>
+						<option value="72">72</option>
+						<option value="73">73</option>
+						<option value="74">74</option>
+						<option value="75">75</option>
+						<option value="76">76</option>
+						<option value="77">77</option>
+						<option value="78">78</option>
+						<option value="79">79</option>
+						<option value="80">80</option>
+						<option value="81">81</option>
+						<option value="82">82</option>
+						<option value="83">83</option>
+						<option value="84">84</option>
+						<option value="85">85</option>
+						<option value="86">86</option>
+						<option value="87">87</option>
+						<option value="88">88</option>
+						<option value="89">89</option>
+						<option value="90">90</option>
+						<option value="91">91</option>
+						<option value="92">92</option>
+						<option value="93">93</option>
+						<option value="94">94</option>
+						<option value="95">95</option>
+						<option value="96">96</option>
+						<option value="97">97</option>
+						<option value="98">98</option>
+						<option value="99">99</option>
+						<option value="100">100</option>
+						<option value="101">101</option>
+						<option value="102">102</option>
+						<option value="103">103</option>
+						<option value="104">104</option>
+						<option value="105">105</option>
+						<option value="106">106</option>
+						<option value="107">107</option>
+						<option value="108">108</option>
+						<option value="109">109</option>
+						<option value="110">110</option>
+						<option value="111">111</option>
+						<option value="112">112</option>
+						<option value="113">113</option>
+						<option value="114">114</option>
+						<option value="115">115</option>
+						<option value="116">116</option>
+						<option value="117">117</option>
+						<option value="118">118</option>
+						<option value="119">119</option>
+						<option value="120">120</option>
+						<option value="121">121</option>
+						<option value="122">122</option>
+						<option value="123">123</option>
+						<option value="124">124</option>
+						<option value="125">125</option>
+						<option value="126">126</option>
+						<option value="127">127</option>
+						<option value="128">128</option>
+						<option value="129">129</option>
+						<option value="130">130</option>
+						<option value="131">131</option>
+						<option value="132">132</option>
+						<option value="133">133</option>
+						<option value="134">134</option>
+						<option value="135">135</option>
+						<option value="136">136</option>
+						<option value="137">137</option>
+						<option value="138">138</option>
+						<option value="139">139</option>
+						<option value="140">140</option>
+						<option value="141">141</option>
+						<option value="142">142</option>
+						<option value="143">143</option>
+						<option value="144">144</option>
+						<option value="145">145</option>
+						<option value="146">146</option>
+						<option value="147">147</option>
+						<option value="148">148</option>
+						<option value="149">149</option>
+						<option value="150">150</option>
+						<option value="151">151</option>
+						<option value="152">152</option>
+						<option value="153">153</option>
+						<option value="154">154</option>
+						<option value="155">155</option>
+						<option value="156">156</option>
+						<option value="157">157</option>
+						<option value="158">158</option>
+						<option value="159">159</option>
+						<option value="160">160</option>
+						<option value="161">161</option>
+						<option value="162">162</option>
+						<option value="163">163</option>
+						<option value="164">164</option>
+						<option value="165">165</option>
+						<option value="166">166</option>
+						<option value="167">167</option>
+						<option value="168">168</option>
+						<option value="169">169</option>
+						<option value="170">170</option>
+						<option value="171">171</option>
+						<option value="172">172</option>
+						<option value="173">173</option>
+						<option value="174">174</option>
+						<option value="175">175</option>
+						<option value="176">176</option>
+						<option value="177">177</option>
+						<option value="178">178</option>
+						<option value="179">179</option>
+						<option value="180">180</option>
+						<option value="181">181</option>
+						<option value="182">182</option>
+						<option value="183">183</option>
+						<option value="184">184</option>
+						<option value="185">185</option>
+						<option value="186">186</option>
+						<option value="187">187</option>
+						<option value="188">188</option>
+						<option value="189">189</option>
+						<option value="190">190</option>
+						<option value="191">191</option>
+						<option value="192">192</option>
+						<option value="193">193</option>
+						<option value="194">194</option>
+						<option value="195">195</option>
+						<option value="196">196</option>
+						<option value="197">197</option>
+						<option value="198">198</option>
+						<option value="199">199</option>
+						<option value="200">200</option>
+						<option value="201">201</option>
+						<option value="202">202</option>
+						<option value="203">203</option>
+						<option value="204">204</option>
+						<option value="205">205</option>
+						<option value="206">206</option>
+						<option value="207">207</option>
+						<option value="208">208</option>
+						<option value="209">209</option>
+						<option value="210">210</option>
+						<option value="211">211</option>
+						<option value="212">212</option>
+						<option value="213">213</option>
+						<option value="214">214</option>
+						<option value="215">215</option>
+						<option value="216">216</option>
+						<option value="217">217</option>
+						<option value="218">218</option>
+						<option value="219">219</option>
+						<option value="220">220</option>
+						<option value="221">221</option>
+						<option value="222">222</option>
+						<option value="223">223</option>
+						<option value="224">224</option>
+						<option value="225">225</option>
+						<option value="226">226</option>
+						<option value="227">227</option>
+						<option value="228">228</option>
+						<option value="229">229</option>
+						<option value="230">230</option>
+						<option value="231">231</option>
+						<option value="232">232</option>
+						<option value="233">233</option>
+						<option value="234">234</option>
+						<option value="235">235</option>
+						<option value="236">236</option>
+						<option value="237">237</option>
+						<option value="238">238</option>
+						<option value="239">239</option>
+						<option value="240">240</option>
+						<option value="241">241</option>
+						<option value="242">242</option>
+						<option value="243">243</option>
+						<option value="244">244</option>
+						<option value="245">245</option>
+						<option value="246">246</option>
+						<option value="247">247</option>
+						<option value="248">248</option>
+					</select>
+				</div>
+				<div class="row field">
+					<label for="bibliography">Bibliography</label><br />
+					<input type="text" name="Cardindex[bibliography]" value="" id="Cardindex_bibliography"  />
+				</div>
+			-->
+				<div class="row buttons">
+					<input type="submit" name="submit" class="submit" value="Search Cards"  />
+					<input type="button" name="clear" class="reset clear-button" value="Clear Form" />
+				</div>
+
+				</fieldset>
+				</form>
+
+		<legend><h2>Search Results</h2></legend>				
+				
+<?php
+	
+	// ==================================================================
+	// connect to DB
+	// ==================================================================	
+	
+	
+	class MyDB extends SQLite3 {
+	  function __construct() {
+		 $this->open('../../data/pbcards.db');
+	  }
+	}
+   
+	$db = new MyDB();
+
+	if(!$db) {
+	  echo $db->lastErrorMsg();
+	}				
+				
+	// ==================================================================
+	// build query
+	// ==================================================================
+	
+	$maxResults = 200;				
+					
+	if( $anyPost === false ) {
+		
+		$query = 'SELECT * FROM CARDS ORDER BY `code`;';
+		
+	} else {
+	
+		$query = 'SELECT * FROM CARDS WHERE ';
+
+		$queryText = array();
+
+		if( !empty($data['code']) ) { array_push($queryText,'code LIKE :code'); } 
+		if( !empty($data['genus']) ) { array_push($queryText,'genus LIKE :genus'); }  
+		if( !empty($data['species']) ) { array_push($queryText,'species LIKE :species'); }  
+		if( !empty($data['author']) ) { array_push($queryText,'author LIKE :author'); }  
+		if( !empty($data['status']) ) { array_push($queryText,'status LIKE :status'); }  
+		if( !empty($data['reference']) ) { array_push($queryText,'reference LIKE :reference'); }  
+		if( !empty($data['age']) ) { array_push($queryText,'age LIKE :age'); }  
+		if( !empty($data['formation']) ) { array_push($queryText,'formation LIKE :formation'); }  
+		if( !empty($data['member']) ) { array_push($queryText,'member LIKE :member'); }  
+		if( !empty($data['locality']) ) { array_push($queryText,'locality LIKE :locality'); }  
+		if( !empty($data['remark']) ) { array_push($queryText,'remarks LIKE :remarks'); }  
+		if( !empty($data['synonym']) ) { array_push($queryText,'synonym LIKE :synonym'); }  
+
+		$queryParams = join(' AND ', $queryText);
+
+		$query .= $queryParams;
+
+		$query .= ' ORDER BY `code` LIMIT ' . $maxResults . ';';
+	
+	}
+					
+//	echo "<h4>" . $query . "</h4>";
+	$queryTextFull = $query;
+	
+	// ==================================================================
+	
+	$stmt = $db->prepare($query);
+	
+	// ==================================================================
+	// bindings
+	// ================================================================== 
+	
+	if( !empty($data['code']) ) { $stmt->bindValue(':code', "%".$data['code']."%", SQLITE3_TEXT); } 
+ 	if( !empty($data['genus']) ) { $stmt->bindValue(':genus', $data['genus'], SQLITE3_TEXT); }  
+ 	if( !empty($data['species']) ) { $stmt->bindValue(':species', $data['species'], SQLITE3_TEXT); }  
+ 	if( !empty($data['author']) ) { $stmt->bindValue(':author', $data['author'], SQLITE3_TEXT); }  
+ 	if( !empty($data['status']) ) { $stmt->bindValue(':status', $data['status'], SQLITE3_TEXT); }  
+ 	if( !empty($data['reference']) ) { $stmt->bindValue(':reference', $data['reference'], SQLITE3_TEXT); }  
+ 	if( !empty($data['age']) ) { $stmt->bindValue(':age', $data['age'], SQLITE3_TEXT); }  
+ 	if( !empty($data['formation']) ) { $stmt->bindValue(':formation', $data['formation'], SQLITE3_TEXT); }  
+ 	if( !empty($data['member']) ) { $stmt->bindValue(':member', $data['member'], SQLITE3_TEXT); }  
+ 	if( !empty($data['locality']) ) { $stmt->bindValue(':locality', $data['locality'], SQLITE3_TEXT); }  
+ 	if( !empty($data['remark']) ) { $stmt->bindValue(':remarks', $data['remark'], SQLITE3_TEXT); }  
+ 	if( !empty($data['synonym']) ) { $stmt->bindValue(':synonym', $data['synonym'], SQLITE3_TEXT); }  
+
+	
+	// ==================================================================
+	// string replace (debug)
+	// ================================================================== 
+	
+	$queryTextFull = str_replace(':code', $data['code'], $queryTextFull);
+ 	$queryTextFull = str_replace(':genus', $data['genus'], $queryTextFull);
+ 	$queryTextFull = str_replace(':species', $data['species'], $queryTextFull);
+ 	$queryTextFull = str_replace(':author', $data['author'], $queryTextFull);
+ 	$queryTextFull = str_replace(':status', $data['status'], $queryTextFull);
+ 	$queryTextFull = str_replace(':reference', $data['reference'], $queryTextFull);
+ 	$queryTextFull = str_replace(':age', $data['age'], $queryTextFull);
+ 	$queryTextFull = str_replace(':formation', $data['formation'], $queryTextFull);
+ 	$queryTextFull = str_replace(':member', $data['member'], $queryTextFull);
+ 	$queryTextFull = str_replace(':locality', $data['locality'], $queryTextFull);  
+ 	$queryTextFull = str_replace(':remarks', $data['remark'], $queryTextFull);
+ 	$queryTextFull = str_replace(':synonym', $data['synonym'], $queryTextFull);
+	
+//	echo "<h4>" . $queryTextFull . "</h4>";
+	
+	// ==================================================================
+	
+	$result = $stmt->execute();
+	
+	$nr = 0;
+	while($row = $result->fetchArray(SQLITE3_ASSOC) ) {
+//	  echo "<tr>";
+//      echo "<td>". $row['code'] . "</td>";
+//	  echo "<td><a href='http://images.peabody.yale.edu/ci/". $row['code'] . ".jpg' target='_blank'>image</a></td>";
+//      echo "<td>". $row['genus'] . "</td>";
+//      echo "<td>". $row['species'] . "</td>";
+//      echo "<td>". $row['author'] . "</td>";
+//      echo "<td>". $row['status'] . "</td>";
+//      echo "<td>". $row['reference'] . "</td>";
+//      echo "<td>". $row['age'] . "</td>";
+//      echo "<td>". $row['formation'] . "</td>";
+//      echo "<td>". $row['member'] . "</td>";
+//      echo "<td>". $row['locality'] . "</td>";
+//      echo "<td>". $row['remarks'] . "</td>";
+//      echo "<td>". $row['synonym'] . "</td>";
+//	  echo "</tr><br /><br />";
+		
+	  echo "<div class='record'>";
+	  echo "	<div id='pretty_photo'>";
+	  echo "		<p><a href='http://images.peabody.yale.edu/ci/" . $row['code'] . ".jpg' rel='prettyPhoto[]'><img class='thumb' src='http://images.peabody.yale.edu/ci/" . $row['code'] . ".jpg' alt='" . $row['code'] . "'></a></p>";
+	  echo "	</div>";
+	  echo "		<p>&nbsp;</p>";
+	  echo "		<p><strong>Card:</strong> ". $row['code'] . "</p>";
+	  echo "		<p><strong>Synonym:</strong> ". $row['synonym'] . "</p>";
+	  echo "		<p><strong>Genus:</strong> ". $row['genus'] . "</p>";
+	  echo "		<p><strong>Species:</strong> ". $row['species'] . "</p>";
+	  echo "		<p><strong>Age:</strong> ". $row['age'] . "</p>";
+	  echo "		<p><strong>Locality:</strong> ". $row['locality'] . "</p>";
+	  echo "		<p>&nbsp;</p>";
+	  echo "		<p><strong><input class='btnsmall saveresult submit' slide='". $row['code'] . "' name='yt0' type='button' value='Save slide'></strong></p>";
+	  echo "		<p><strong><input class='btnsmall viewinfo infobutton reset' slide='". $row['code'] . "' name='yt1' type='button' value='View information'></strong></p>";
+	  echo "</div>";
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	  $nr++;
+   }
+   $maxMessage = "";
+					
+   if( $nr == $maxResults ) {
+	   $maxMessage = "Showing <strong>" . $nr . "</strong> cards of many.  Please narrow your search criteria.";
+   } else if( $nr == 0 ) {
+	   $maxMessage = "No search results.  Please choose different search criteria.";
+   } else if( $nr == 1 ) {
+	   $maxMessage = "<strong>1</strong> card found.";
+   } else {
+	   $maxMessage = "<strong>" . $nr . "</strong> cards found.";
+   }
+					
+   echo "<p>". $maxMessage ."</p>";
+   echo "<p><button class='btnsmall new-search submit' href='./'>Edit Search</button></p>";
+
+
+	
+   $db->close();				
+					
+					
+
+					
+					
+?>		
+			
+			
+		</div>
+	</div>
+			
+	<div class="bodycontent">
+		<div class="footer">
+			<div class="footerlogo">
+				<img src="../public/images/yale.png" width="58" height="25" border="0" />
+			</div>
+			<div class="footertext">
+				Copyright 2019 Peabody Museum of Natural History, Yale University. All rights reserved.
+			</div>
+		</div>
+	</div>
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-3250139-3']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>
+
+
+
+
+

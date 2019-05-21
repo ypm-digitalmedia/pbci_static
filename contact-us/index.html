@@ -28,18 +28,13 @@
     <div class="bodycontent">
     	<div class="contentarea">
         	<div>
-<h3>The editors would appreciate receiving comments and corrections from the users through this website. They would also value suggestions for further additions to the list of references.</h3>
+	<h2>Contact Us</h2>
+<p align="left">If you have any questions about the Paleobotany card search images, please contact Dr. Shusheng Hu 
+
+(<span class="obfuscated_link">fuhfurat.uh(lkm)lnyr.rqh</span>) in the 
+<a target="_blank" href="http://peabody.yale.edu/collections/paleobotany">Division of Paleobotany</a> 
+at the <a target="_blank" href="http://peabody.yale.edu">Yale Peabody Museum of Natural History</a>.</p>
 <p>&nbsp;</p>
-<div class="errors">
-</div>
-<form action="../contact-us" method="post" accept-charset="utf-8" class="add" id="myform"><div style="display:none">
-<input type="hidden" name="csrf_token_name" value="b1ac2de5a946a4ba3d868610b3e81f41" />
-</div>Name<br /><input type="text" name="name" value="" id="name"  /><br /><br />Email<br /><input type="text" name="email" value="" id="email"  /><br /><br />Category<br /><select name="category">
-<option value="1">Questions</option>
-<option value="2">Comments</option>
-<option value="3">Card Errors</option>
-<option value="4">Bibliography Errors</option>
-</select><br /><br />Please write your questions and comments here:<br /><textarea name="text" cols="40" rows="10" id="text" ></textarea><br /><br />Submit the word you see below:<br /><br /><input type="text" name="captcha" value="" /><br /><br /><input type="submit" name="submit" value="Submit"  /></form>
 </div>
 
 
@@ -51,7 +46,7 @@
             	<img src="../public/images/yale.png" width="58" height="25" border="0" />
             </div>
             <div class="footertext">
-            	Copyright 2012 Peabody Museum of Natural History, Yale University. All rights reserved.
+            	Copyright 2019 Peabody Museum of Natural History, Yale University. All rights reserved.
             </div>
         </div>
     </div>
@@ -66,7 +61,64 @@
     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
   })();
+jQuery(function($) {
 
+    $.fn.rot13 = function() {
+        this.each(function() {
+            $(this).text($(this).text().replace(/[a-z0-9]/ig, function(chr) {
+                var cc = chr.charCodeAt(0);
+                if (cc >= 65 && cc <= 90) cc = 65 + ((cc - 52) % 26);
+                else if (cc >= 97 && cc <= 122) cc = 97 + ((cc - 84) % 26);
+                else if (cc >= 48 && cc <= 57) cc = 48 + ((cc - 43) % 10);
+                return String.fromCharCode(cc);
+            }));
+        });
+        return this;
+    };
+    
+
+      /*
+      * Email Defuscator - jQuery plugin 1.0 alpha
+      *
+      * Copyright (c) 2007 Joakim Stai
+      *
+      * Dual licensed under the MIT and GPL licenses:
+      *   http://www.opensource.org/licenses/mit-license.php
+      *   http://www.gnu.org/licenses/gpl.html
+      *
+      *
+      */
+
+      /**
+      * Converts obfuscated email addresses into normal, working email addresses.
+      *
+      * @name defuscate
+      * @param Boolean link If true, all defuscated email addresses will be turned into links, defaults to true (optional)
+      * @descr Converts obfuscated email addresses into normal email addresses
+      */
+
+      jQuery.fn.defuscate = function( settings ) {
+        settings = jQuery.extend({
+        link: true
+        }, settings);
+        var regex = /\b([\w-\.]+)\([^)]+\)((?:[\w-]+\.)+[a-zA-Z]{2,6})\b/gi;
+        return this.each(function() {
+          
+        // Defuscate the element's contents
+          $(this).html($(this).html().replace(regex,  '$1@$2'));
+          $(this).rot13();
+          if (settings.link) {
+            var address = $(this).html();
+            $(this).html('<a href="mailto:'+ address +'">'+ address +'</a>');
+          }
+        });
+      }
+      
+
+    $(".obfuscated_link").defuscate({link:true});
+    $(".obfuscated").defuscate({link:false});
+    
+});
 </script>
 </body>
 </html>
