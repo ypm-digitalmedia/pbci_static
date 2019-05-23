@@ -387,7 +387,7 @@ if( !empty($data['code']) ||
 	
 	class MyDB extends SQLite3 {
 	  function __construct() {
-		 $this->open('../../data/pbcards.db');
+		 $this->open('../../../data/pbcards.db');
 	  }
 	}
    

@@ -18,7 +18,7 @@ if (!isset($_GET['card'])) {
 	
 	class MyDB extends SQLite3 {
 	  function __construct() {
-		 $this->open('../../data/pbcards.db');
+		 $this->open('../../../data/pbcards.db');
 	  }
 	}
    
