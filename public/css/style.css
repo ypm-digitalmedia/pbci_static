@@ -190,7 +190,7 @@ legend {
 	padding: 0.5em 0;
 }
 
-.submit {
+.submit, .saveresult {
 	background-color: #527d73;
 	font-size: 1.4em;
 	padding: 0.1em;
@@ -214,6 +214,10 @@ legend {
 	border: 2px #527d73 solid;
 }
 
+.removesaved, .removesaved-table, .viewinfo-table {
+	color: #968267!important;
+}
+
 .btnsmall {
 	width: 40%!important;
 	font-size: 1.3em!important;
@@ -224,11 +228,52 @@ legend {
 	height: auto;
 }
 
+.ui-sortable * img {
+	width: 25%;
+}
+	
+.grid-view table.items th {
+    background: #527d73;
+    text-align: center;
+}
+
+.grid-view table.items tr.even {
+    background: #F8F8F8;
+}
+
+.grid-view table.items tr.odd {
+    background: #cad8d5;
+}
+
+.grid-view table.items {
+    background: white;
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px #D0E3EF solid;
+    margin-top: 15px;
+	font-size: 0.9em;
+}
+
+.grid-view table.items th, .grid-view table.items td {
+    font-size: 0.9em;
+    border: 1px white solid;
+    padding: 0.3em;
+}
+
 .record {
 	background-color: #a8beb9;
 	margin: 1em;
 	border: 2px #ddd solid;
     text-align: center;
     padding: 2em 0;
+	font-family: Verdana, Geneva, sans-serif;
+}
+
+.record img, .info img {
+    width: 50%;
+    max-width: 325px;
+}
+
+.ppt {
 	font-family: Verdana, Geneva, sans-serif;
 }

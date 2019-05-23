@@ -200,7 +200,7 @@ function microtime_diff($start, $end = null)
    while($row = $result->fetchArray(SQLITE3_ASSOC) ) {
 	  echo "<tr>";
       echo "<td>". $row['code'] . "</td>";
-	  echo "<td><a href='http://images.peabody.yale.edu/ci/". $row['code'] . ".jpg' target='_blank'>image</a></td>";
+	  echo "<td><a href='http://images.peabody.yale.edu/ci/". $row['code'] . ".jpg' target='_blank'>full</a> <a href='http://images.peabody.yale.edu/ci/web/". $row['code'] . ".jpg' target='_blank'>thumb</a></td>";
       echo "<td>". $row['genus'] . "</td>";
       echo "<td>". $row['species'] . "</td>";
       echo "<td>". $row['author'] . "</td>";

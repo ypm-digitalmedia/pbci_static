@@ -55,57 +55,57 @@ if( !empty($data['code']) ||
     </div>
     <div class="bodycontent">
     	<div class="contentarea">
-			<form action="results.php" method="post" accept-charset="utf-8" class="add" id="myform" style="display: none">
+			<form action="results.php" method="post" accept-charset="utf-8" class="add" id="findcards" style="display: none">
 			<fieldset id="searchFieldset">
 				<legend><h2>Search for Cards</h2></legend>
 
 				<div class="row field">
 					<label for="code">Code</label><br />
-					<input type="text" name="Cardindex[code]" value="" id="Cardindex_code"  />
+					<input type="text" name="Cardindex[code]" value="<?= $data['code'] ?>" id="Cardindex_code"  />
 				</div>
 				<div class="row field">
 					<label for="genus">Genus</label><br />
-					<input type="text" name="Cardindex[genus]" value="" id="Cardindex_genus"  />
+					<input type="text" name="Cardindex[genus]" value="<?= $data['genus'] ?>" id="Cardindex_genus"  />
 				</div>
 				<div class="row field">
 					<label for="species">Species</label><br />
-					<input type="text" name="Cardindex[species]" value="" id="Cardindex_species"  />
+					<input type="text" name="Cardindex[species]" value="<?= $data['species'] ?>" id="Cardindex_species"  />
 				</div>
 				<div class="row field">
 					<label for="author">Author</label><br />
-					<input type="text" name="Cardindex[author]" value="" id="Cardindex_author"  />
+					<input type="text" name="Cardindex[author]" value="<?= $data['author'] ?>" id="Cardindex_author"  />
 				</div>
 				<div class="row field">
 					<label for="status">Status</label><br />
-					<input type="text" name="Cardindex[status]" value="" id="Cardindex_status"  />
+					<input type="text" name="Cardindex[status]" value="<?= $data['status'] ?>" id="Cardindex_status"  />
 				</div>
 				<div class="row field">
 					<label for="status">Reference</label><br />
-					<input type="text" name="Cardindex[reference]" value="" id="Cardindex_reference"  />
+					<input type="text" name="Cardindex[reference]" value="<?= $data['reference'] ?>" id="Cardindex_reference"  />
 				</div>
 				<div class="row field">
 					<label for="age">Age</label><br />
-					<input type="text" name="Cardindex[age]" value="" id="Cardindex_age"  />
+					<input type="text" name="Cardindex[age]" value="<?= $data['age'] ?>" id="Cardindex_age"  />
 				</div>
 				<div class="row field">
 					<label for="formation">Formation</label><br />
-					<input type="text" name="Cardindex[formation]" value="" id="Cardindex_formation"  />
+					<input type="text" name="Cardindex[formation]" value="<?= $data['formation'] ?>" id="Cardindex_formation"  />
 				</div>
 				<div class="row field">
 					<label for="formation">Member</label><br />
-					<input type="text" name="Cardindex[member]" value="" id="Cardindex_member"  />
+					<input type="text" name="Cardindex[member]" value="<?= $data['member'] ?>" id="Cardindex_member"  />
 				</div>
 				<div class="row field">
 					<label for="locality">Locality</label><br />
-					<input type="text" name="Cardindex[locality]" value="" id="Cardindex_locality"  />
+					<input type="text" name="Cardindex[locality]" value="<?= $data['locality'] ?>" id="Cardindex_locality"  />
 				</div>
 				<div class="row field">
 					<label for="synonym">Remark</label><br />
-					<input type="text" name="Cardindex[remark]" value="" id="Cardindex_remark"  />
+					<input type="text" name="Cardindex[remark]" value="<?= $data['remark'] ?>" id="Cardindex_remark"  />
 				</div>
 				<div class="row field">
 					<label for="synonym">Synonym</label><br />
-					<input type="text" name="Cardindex[synonym]" value="" id="Cardindex_synonym"  />
+					<input type="text" name="Cardindex[synonym]" value="<?= $data['synonym'] ?>" id="Cardindex_synonym"  />
 				</div>
 			<!--
 				<div class="row field">
@@ -404,8 +404,11 @@ if( !empty($data['code']) ||
 	$maxResults = 200;				
 					
 	if( $anyPost === false ) {
+//		normal select
+		$query = 'SELECT * FROM CARDS ORDER BY `code` LIMIT ' . $maxResults . ';';
 		
-		$query = 'SELECT * FROM CARDS ORDER BY `code`;';
+//		random select
+//		$query = 'SELECT * FROM CARDS WHERE `code` IN (SELECT `code` FROM CARDS ORDER BY RANDOM() LIMIT ' . $maxResults . ');';
 		
 	} else {
 	
@@ -486,7 +489,7 @@ if( !empty($data['code']) ||
 	while($row = $result->fetchArray(SQLITE3_ASSOC) ) {
 //	  echo "<tr>";
 //      echo "<td>". $row['code'] . "</td>";
-//	  echo "<td><a href='http://images.peabody.yale.edu/ci/". $row['code'] . ".jpg' target='_blank'>image</a></td>";
+//	  echo "<td><a href='http://images.peabody.yale.edu/ci/web/". $row['code'] . ".jpg' target='_blank'>image</a></td>";
 //      echo "<td>". $row['genus'] . "</td>";
 //      echo "<td>". $row['species'] . "</td>";
 //      echo "<td>". $row['author'] . "</td>";
@@ -502,7 +505,7 @@ if( !empty($data['code']) ||
 		
 	  echo "<div class='record'>";
 	  echo "	<div id='pretty_photo'>";
-	  echo "		<p><a href='http://images.peabody.yale.edu/ci/" . $row['code'] . ".jpg' rel='prettyPhoto[]'><img class='thumb' src='http://images.peabody.yale.edu/ci/" . $row['code'] . ".jpg' alt='" . $row['code'] . "'></a></p>";
+	  echo "		<p><a href='http://images.peabody.yale.edu/ci/" . $row['code'] . ".jpg' rel='prettyPhoto[]'><img class='thumb' src='http://images.peabody.yale.edu/ci/web/" . $row['code'] . ".jpg' alt='" . $row['code'] . "'></a></p>";
 	  echo "	</div>";
 	  echo "		<p>&nbsp;</p>";
 	  echo "		<p><strong>Card:</strong> ". $row['code'] . "</p>";
@@ -512,8 +515,8 @@ if( !empty($data['code']) ||
 	  echo "		<p><strong>Age:</strong> ". $row['age'] . "</p>";
 	  echo "		<p><strong>Locality:</strong> ". $row['locality'] . "</p>";
 	  echo "		<p>&nbsp;</p>";
-	  echo "		<p><strong><input class='btnsmall saveresult submit' slide='". $row['code'] . "' name='yt0' type='button' value='Save slide'></strong></p>";
-	  echo "		<p><strong><input class='btnsmall viewinfo infobutton reset' slide='". $row['code'] . "' name='yt1' type='button' value='View information'></strong></p>";
+	  echo "		<p><strong><input class='btnsmall saveresult' card='". $row['code'] . "' name='yt0' type='button' value='Save card'></strong></p>";
+	  echo "		<p><strong><input class='btnsmall viewinfo infobutton reset' card='". $row['code'] . "' name='yt1' type='button' value='View information'></strong></p>";
 	  echo "</div>";
 		
 		
